@@ -1,3 +1,9 @@
+local cwd = vim.fn.getcwd()
+local rtp =  vim.api.nvim_get_option('packpath')
+rtp = rtp .. "," .. cwd
+vim.api.nvim_set_option('packpath', rtp)
+
+
 local packer = require 'packer' 
 
 
@@ -14,6 +20,14 @@ local telescope_setup = function()
 		},
 	})
 end
+
+local util = require 'packer.util'
+print(util.join_paths(cwd, 'packer_compiled.lua'))
+
+packer.init({
+  package_root = util.join_paths(cwd, 'pack'),
+  compile_path = util.join_paths(cwd, 'packer_compiled.lua'),
+})
 
 packer.startup(function()
 	use 'wbthomason/packer.nvim'
