@@ -19,7 +19,7 @@ local function prequire(...)
 end
 
 packer.startup(function()
-	use 'wbthomason/packer.nvim'
+	-- use 'wbthomason/packer.nvim'
 
 	use 'scrooloose/nerdtree'
 	use 'NLKNguyen/papercolor-theme'
