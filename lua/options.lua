@@ -1,9 +1,9 @@
 local cwd = vim.fn.expand('<sfile>:p:h')
 
 local global_options = {
-	backupdir = cwd .. "/backupdir",
-	directory = cwd .. "/swapdir",
-	undodir = cwd .. "/undodir",
+	backupdir = cwd .. "/.backupdir",
+	directory = cwd .. "/.swapdir",
+	undodir = cwd .. "/.undodir",
 	backspace = 'indent,eol,start',
 	history = 50,
 	ruler =  true,

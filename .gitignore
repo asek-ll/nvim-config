@@ -1,4 +1,7 @@
-packer_compiled.lua
-backupdir
-swapdir
-undodir
+lua/packer_compiled.lua
+.backupdir/*
+!.backupdir/.gitkeep
+.swapdir/*
+!.swapdir/.gitkeep
+.undodir/*
+!.undodir/.gitkeep
