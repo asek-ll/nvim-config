@@ -20,6 +20,7 @@ end
 
 packer.startup(function()
     use 'ziglang/zig.vim'
+    use 'fatih/vim-go'
 
     use 'editorconfig/editorconfig-vim'
 
