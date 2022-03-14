@@ -19,7 +19,49 @@ local function prequire(...)
 end
 
 packer.startup(function()
+    use 'udalov/kotlin-vim'
+
+    use 'wlangstroth/vim-racket'
+
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        config = function() 
+            require'nvim-treesitter.configs'.setup {
+                ensure_installed = { 'http', 'json' },
+
+                sync_install = false,
+
+                ignore_install = { "javascript" },
+
+                highlight = {
+                    enable = true,
+
+                    disable = { "c", "rust" },
+
+                    additional_vim_regex_highlighting = false,
+                },
+            }
+        end
+    }
+
     use 'ziglang/zig.vim'
+
+    use {
+        'NTBBloodbath/rest.nvim',
+        config = function() 
+            require("rest-nvim").setup({
+                result_split_horizontal = false,
+                skip_ssl_verification = false,
+                highlight = {
+                    enabled = true,
+                    timeout = 150,
+                },
+                jump_to_request = false,
+                env_file = '.env',
+                yank_dry_run = true,
+            })
+        end
+    }
 
     use 'editorconfig/editorconfig-vim'
 
@@ -37,6 +79,18 @@ packer.startup(function()
     use 'tpope/vim-fugitive'
 
     use 'godlygeek/tabular'
+    -- use 'nvie/vim-flake8'
+    use {
+        'mfussenegger/nvim-lint',
+        config = function()
+            require('lint').linters_by_ft = {
+                python = {'flake8',}
+            }
+
+            vim.cmd("au BufWritePost <buffer> lua require('lint').try_lint()")
+        end
+    }
+
 
     use 'terryma/vim-multiple-cursors'
     use {
