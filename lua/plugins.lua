@@ -19,9 +19,11 @@ local function prequire(...)
 end
 
 packer.startup(function()
-    use 'udalov/kotlin-vim'
 
+    use 'udalov/kotlin-vim'
     use 'wlangstroth/vim-racket'
+    use 'ziglang/zig.vim'
+    use 'fatih/vim-go'
 
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -44,8 +46,6 @@ packer.startup(function()
         end
     }
 
-    use 'ziglang/zig.vim'
-    use 'fatih/vim-go'
 
     use {
         'NTBBloodbath/rest.nvim',
@@ -77,10 +77,10 @@ packer.startup(function()
     use 'scrooloose/nerdtree'
     use 'tpope/vim-surround'
     use 'tpope/vim-commentary'
+    use 'godlygeek/tabular'
+
     use 'tpope/vim-fugitive'
 
-    use 'godlygeek/tabular'
-    -- use 'nvie/vim-flake8'
     use {
         'mfussenegger/nvim-lint',
         config = function()
@@ -149,6 +149,10 @@ packer.startup(function()
             }
         end
     }
+
+	use 'honza/vim-snippets'
+
+
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-nvim-lsp'
     use { 'saadparwaiz1/cmp_luasnip' }

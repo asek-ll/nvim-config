@@ -518,3 +518,5 @@ ls.autosnippets = {
 ls.filetype_extend("lua", { "c" })
 -- in a cpp file: search c-snippets, then all-snippets only (no cpp-snippets!!).
 ls.filetype_set("cpp", { "c" })
+
+require("luasnip.loaders.from_snipmate").lazy_load()
