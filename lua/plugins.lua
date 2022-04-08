@@ -22,8 +22,6 @@ local function prequire(...)
 end
 
 packer.startup(function()
-    use 'wbthomason/packer.nvim'
-
     use 'udalov/kotlin-vim'
     use 'wlangstroth/vim-racket'
     use 'ziglang/zig.vim'
@@ -162,7 +160,6 @@ packer.startup(function()
             require('formatter').setup {
                 filetype = {
                     lua = {
-
                         function()
                             local util = require 'packer.util'
                             local cwd = require('vars').cwd
@@ -172,6 +169,36 @@ packer.startup(function()
                                     '--config-path ' .. util.join_paths(cwd, 'lua', 'stylua.toml'),
                                     '-',
                                 },
+                                stdin = true,
+                            }
+                        end,
+                    },
+                    json = {
+                        function()
+                            return {
+                                exe = 'prettier',
+                                args = {
+                                    '--parser',
+                                    'json',
+                                },
+                                stdin = true,
+                            }
+                        end,
+                    },
+                    python = {
+                        function()
+                            return {
+                                exe = 'black',
+                                args = { '-' },
+                                stdin = true,
+                            }
+                        end,
+                    },
+                    rust = {
+                        function()
+                            return {
+                                exe = 'rustfmt',
+                                args = { '--emit=stdout', '--edition=2021' },
                                 stdin = true,
                             }
                         end,
@@ -214,3 +241,10 @@ packer.startup(function()
 end)
 
 prequire 'packer_compiled'
+
+vim.cmd [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]]
