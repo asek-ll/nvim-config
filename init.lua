@@ -13,4 +13,4 @@ if vim.env['DARK_MODE'] then
 	vim.cmd('hi EndOfBuffer guibg=NONE ctermbg=NONE')
 else
 	vim.api.nvim_set_option('background', 'light')
-end--
+end

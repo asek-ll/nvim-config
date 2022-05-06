@@ -1,3 +1,6 @@
+local vars = require 'vars'
+local cwd = vars.cwd
+
 local function map(mode, lhs, rhs, opts)
     local options = { noremap = true }
     if opts then
@@ -14,6 +17,7 @@ map('n', '<F2>', ':Telescope file_browser<CR>')
 map('n', '<F3>', ':Telescope find_files<CR>')
 map('n', '<F4>', ':Telescope buffers<CR>')
 map('n', '<F5>', ':Telescope live_grep<CR>')
+map('n', '<C-A-s>', ':Telescope find_files cwd=' .. cwd .. '<CR>')
 
 map('n', '<F7>', ':new term://zsh<CR><C-w>Ji')
 map('n', '<F9>', ':make!<CR>')
