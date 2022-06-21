@@ -90,6 +90,7 @@ packer.startup(function()
         config = function()
             require('lint').linters_by_ft = {
                 python = { 'flake8' },
+                cpp = { 'clangtidy' },
             }
 
             vim.cmd "au BufWritePost <buffer> lua require('lint').try_lint()"
@@ -160,13 +161,16 @@ packer.startup(function()
             }
         end,
     }
-    use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
+    -- use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
 
     use 'honza/vim-snippets'
 
     use {
         'mhartington/formatter.nvim',
         config = function()
+            require('formatter.config').set_defaults {
+                log_level = vim.log.levels.WARN,
+            }
             require('formatter').setup {
                 filetype = {
                     lua = {
@@ -213,6 +217,9 @@ packer.startup(function()
                             }
                         end,
                     },
+                    cpp = {
+                        require('formatter.filetypes.cpp').clangformat,
+                    },
                 },
             }
         end,
@@ -243,7 +250,7 @@ packer.startup(function()
                 vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
                 vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
                 vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-                vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+                -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
                 vim.api.nvim_buf_set_keymap(
                     bufnr,
                     'n',
