@@ -11,8 +11,10 @@ end
 
 -- vim.g.mapleader = ' '
 
-map('n', '<F1>', ':NERDTreeToggle<CR>')
-map('n', '<A-1>', ':NERDTreeFind<CR>')
+-- map('n', '<F1>', ':NERDTreeToggle<CR>')
+-- map('n', '<A-1>', ':NERDTreeFind<CR>')
+map('n', '<F1>', ':NvimTreeToggle<CR>')
+map('n', '<A-1>', ':NvimTreeFindFileToggle<CR>')
 map('n', '<F2>', ':Telescope file_browser<CR>')
 map('n', '<F3>', ':Telescope find_files<CR>')
 map('n', '<F4>', ':Telescope buffers<CR>')

@@ -79,6 +79,20 @@ packer.startup(function()
     use 'sainnhe/edge'
 
     use 'scrooloose/nerdtree'
+    use {
+        'kyazdani42/nvim-tree.lua',
+        config = function()
+            require('nvim-tree').setup {
+                update_focused_file = {
+                    update_root = true,
+                },
+                filters = {
+                    dotfiles = false,
+                },
+            }
+        end,
+    }
+
     use 'tpope/vim-surround'
     use 'tpope/vim-commentary'
     use 'godlygeek/tabular'
@@ -168,9 +182,6 @@ packer.startup(function()
     use {
         'mhartington/formatter.nvim',
         config = function()
-            require('formatter.config').set_defaults {
-                log_level = vim.log.levels.WARN,
-            }
             require('formatter').setup {
                 filetype = {
                     lua = {
@@ -194,6 +205,18 @@ packer.startup(function()
                                 args = {
                                     '--parser',
                                     'json',
+                                },
+                                stdin = true,
+                            }
+                        end,
+                    },
+                    javascript = {
+                        function()
+                            return {
+                                exe = 'prettier',
+                                args = {
+                                    '--parser',
+                                    'babel',
                                 },
                                 stdin = true,
                             }
