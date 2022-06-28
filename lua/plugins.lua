@@ -241,6 +241,30 @@ packer.startup(function()
                             }
                         end,
                     },
+                    typescript = {
+                        function()
+                            return {
+                                exe = 'prettier',
+                                args = {
+                                    '--parser',
+                                    'typescript',
+                                },
+                                stdin = true,
+                            }
+                        end,
+                    },
+                    typescriptreact = {
+                        function()
+                            return {
+                                exe = 'prettier',
+                                args = {
+                                    '--parser',
+                                    'typescript',
+                                },
+                                stdin = true,
+                            }
+                        end,
+                    },
                     python = {
                         function()
                             return {
