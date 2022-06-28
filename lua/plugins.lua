@@ -1,3 +1,4 @@
+-- vim:foldmethod=marker:
 local vars = require 'vars'
 local cwd = vars.cwd
 
@@ -32,9 +33,10 @@ packer.startup(function()
 
     use {
         'nvim-treesitter/nvim-treesitter',
+        -- {{{ config
         config = function()
             require('nvim-treesitter.configs').setup {
-                ensure_installed = { 'http', 'json' },
+                ensure_installed = { 'http', 'json', 'org' },
 
                 sync_install = false,
 
@@ -49,10 +51,12 @@ packer.startup(function()
                 },
             }
         end,
+        -- }}}
     }
 
     use {
         'NTBBloodbath/rest.nvim',
+        -- {{{ config
         config = function()
             require('rest-nvim').setup {
                 result_split_horizontal = false,
@@ -66,21 +70,20 @@ packer.startup(function()
                 yank_dry_run = true,
             }
         end,
+        -- }}}
     }
 
     use 'editorconfig/editorconfig-vim'
 
     use 'NLKNguyen/papercolor-theme'
-    use {
-        'sonph/onehalf',
-        rtp = 'vim/',
-    }
+    use { 'sonph/onehalf', rtp = 'vim/' }
     use 'cocopon/iceberg.vim'
     use 'sainnhe/edge'
 
     use 'scrooloose/nerdtree'
     use {
         'kyazdani42/nvim-tree.lua',
+        -- {{{ config
         config = function()
             require('nvim-tree').setup {
                 update_focused_file = {
@@ -89,15 +92,25 @@ packer.startup(function()
                 filters = {
                     dotfiles = false,
                 },
+                view = {
+                    mappings = {
+                        list = {
+                            { key = 't', action = 'tabnew' },
+                            { key = 's', action = 'vsplit' },
+                            { key = 'i', action = 'split' },
+                        },
+                    },
+                },
             }
         end,
+        -- }}}
     }
 
     use 'tpope/vim-surround'
     use 'tpope/vim-commentary'
-    use 'godlygeek/tabular'
-
     use 'tpope/vim-fugitive'
+
+    use 'godlygeek/tabular'
 
     use {
         'mfussenegger/nvim-lint',
@@ -133,6 +146,7 @@ packer.startup(function()
 
     use {
         'nvim-telescope/telescope.nvim',
+        -- {{{ config
         config = function()
             local actions = require 'telescope.actions'
 
@@ -146,6 +160,7 @@ packer.startup(function()
                 },
             }
         end,
+        -- }}}
     }
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
@@ -153,6 +168,7 @@ packer.startup(function()
     use 'L3MON4D3/LuaSnip'
     use {
         'hrsh7th/nvim-cmp',
+        -- {{{ config
         config = function()
             local cmp = require 'cmp'
             cmp.setup {
@@ -174,6 +190,7 @@ packer.startup(function()
                 },
             }
         end,
+        -- }}}
     }
     -- use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
 
@@ -181,6 +198,7 @@ packer.startup(function()
 
     use {
         'mhartington/formatter.nvim',
+        -- {{{ config
         config = function()
             require('formatter').setup {
                 filetype = {
@@ -246,6 +264,7 @@ packer.startup(function()
                 },
             }
         end,
+        -- }}}
     }
 
     use 'hrsh7th/cmp-buffer'
@@ -254,6 +273,7 @@ packer.startup(function()
 
     use {
         'neovim/nvim-lspconfig',
+        -- {{{ config
         config = function()
             local nvim_lsp = require 'lspconfig'
 
@@ -320,6 +340,7 @@ packer.startup(function()
                 capabilities = capabilities,
             }
         end,
+        -- }}}
     }
 end)
 
