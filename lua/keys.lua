@@ -11,8 +11,6 @@ end
 
 -- vim.g.mapleader = ' '
 
--- map('n', '<F1>', ':NERDTreeToggle<CR>')
--- map('n', '<A-1>', ':NERDTreeFind<CR>')
 map('n', '<F1>', ':NvimTreeToggle<CR>')
 map('n', '<A-1>', ':NvimTreeFindFileToggle<CR>')
 map('n', '<F2>', ':Telescope file_browser<CR>')
@@ -21,7 +19,9 @@ map('n', '<F4>', ':Telescope buffers<CR>')
 map('n', '<F5>', ':Telescope live_grep<CR>')
 map('n', '<C-A-s>', ':Telescope find_files cwd=' .. cwd .. '<CR>')
 
-map('n', '<F7>', ':new term://zsh<CR><C-w>Ji')
+map('n', '<F7>', ':FloatermToggle<CR>')
+map('t', '<F7>', '<C-\\><C-n>:FloatermToggle<CR>')
+
 map('n', '<F9>', ':make!<CR>')
 map('n', '<A-2>', ':Ranger<CR>')
 map('t', '<Esc>', '<C-\\><C-n>')

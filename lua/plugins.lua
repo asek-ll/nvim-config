@@ -28,6 +28,7 @@ packer.startup(function()
     use 'wlangstroth/vim-racket'
     use 'ziglang/zig.vim'
     use 'fatih/vim-go'
+    use 'voldikss/vim-floaterm'
     -- use 'weirongxu/plantuml-previewer.vim'
     -- use 'tyru/open-browser.vim'
 
