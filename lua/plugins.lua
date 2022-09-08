@@ -31,6 +31,7 @@ packer.startup(function()
     use 'voldikss/vim-floaterm'
     -- use 'weirongxu/plantuml-previewer.vim'
     -- use 'tyru/open-browser.vim'
+    use 'tikhomirov/vim-glsl'
 
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -286,6 +287,9 @@ packer.startup(function()
                     cpp = {
                         require('formatter.filetypes.cpp').clangformat,
                     },
+                    glsl = {
+                        require('formatter.defaults').clangformat,
+                    },
                 },
             }
         end,
@@ -363,6 +367,10 @@ packer.startup(function()
             }
             nvim_lsp.gopls.setup {
                 capabilities = capabilities,
+            }
+            nvim_lsp.clangd.setup {
+                capabilities = capabilities,
+                on_attach = on_attach,
             }
         end,
         -- }}}
