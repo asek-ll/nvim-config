@@ -13,9 +13,10 @@ end
 
 map('n', '<F1>', ':NvimTreeToggle<CR>')
 map('n', '<A-1>', ':NvimTreeFindFileToggle<CR>')
-map('n', '<F2>', ':Telescope file_browser<CR>')
+map('n', '<F2>', ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
+
 map('n', '<F3>', ':Telescope find_files<CR>')
-map('n', '<F4>', ':Telescope buffers<CR>')
+map('n', '<F4>', ':lua require("telescope-lists").buffers()<CR>')
 map('n', '<F5>', ':Telescope live_grep<CR>')
 map('n', '<C-A-s>', ':Telescope find_files cwd=' .. cwd .. '<CR>')
 

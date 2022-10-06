@@ -28,7 +28,18 @@ packer.startup(function()
     use 'wlangstroth/vim-racket'
     use 'ziglang/zig.vim'
     use 'fatih/vim-go'
-    use 'voldikss/vim-floaterm'
+    use {
+        'voldikss/vim-floaterm',
+        config = function()
+            -- vim.g.floaterm_wintype = 'split'
+            vim.g.floaterm_width = 0.8
+            vim.g.floaterm_position = 'bottom'
+        end,
+    }
+
+    use {
+        'ThePrimeagen/harpoon',
+    }
     -- use 'weirongxu/plantuml-previewer.vim'
     -- use 'tyru/open-browser.vim'
     use 'tikhomirov/vim-glsl'
