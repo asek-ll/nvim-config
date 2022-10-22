@@ -9,26 +9,35 @@ local function map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- vim.g.mapleader = ' '
 
-map('n', '<F1>', ':NvimTreeToggle<CR>')
-map('n', '<A-1>', ':NvimTreeFindFileToggle<CR>')
-map('n', '<F2>', ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
+vim.g.mapleader = ' '
 
-map('n', '<F3>', ':Telescope find_files<CR>')
-map('n', '<F4>', ':lua require("telescope-lists").buffers()<CR>')
-map('n', '<F5>', ':Telescope live_grep<CR>')
-map('n', '<C-A-s>', ':Telescope find_files cwd=' .. cwd .. '<CR>')
+map('n', '<F1>', '<cmd>NvimTreeToggle<CR>')
+map('n', '<A-1>', '<cmd>NvimTreeFindFileToggle<CR>')
+map('n', '<F2>', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>')
 
-map('n', '<F7>', ':FloatermToggle<CR>')
-map('t', '<F7>', '<C-\\><C-n>:FloatermToggle<CR>')
+map('n', '<F3>', '<cmd>Telescope find_files<CR>')
+map('n', '<F4>', '<cmd>lua require("telescope-lists").buffers()<CR>')
+map('n', '<F5>', '<cmd>Telescope live_grep<CR>')
+map('n', '<C-A-s>', '<cmd>Telescope find_files cwd=' .. cwd .. '<CR>')
 
-map('n', '<F9>', ':make!<CR>')
-map('n', '<A-2>', ':Ranger<CR>')
+-- map('t', '<F7>', '<C-\\><C-n>:FloatermToggle<CR>')
+map('t', '<F7>', '<cmd>FloatermToggle<CR>')
+
+-- map('n', '<F7>', ':FloatermToggle<CR>')
+map('n', '<F7>', '<cmd>lua require("harpoon.tmux").gotoTerminal(1)<CR>')
+map('n', '<Leader>7', '<cmd>lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>')
+
+-- map('n', '<F9>', ':lua require("harpoon.tmux").sendCommand(1, 1)<CR>')
+map('n', '<F9>', '<cmd>lua require("harpoon.tmux").sendCommand(1, 1)require("harpoon.tmux").gotoTerminal(1)<CR>')
+
+
+-- map('n', '<F9>', ':make!<CR>')
+map('n', '<A-2>', '<cmd>Ranger<CR>')
 map('t', '<Esc>', '<C-\\><C-n>')
-map('n', '<C-k>', ':Commentary<CR>')
-map('v', '<C-k>', ':Commentary<CR>')
-map('n', '<C-f>', ':Format<CR>')
+map('n', '<C-k>', '<cmd>Commentary<CR>')
+map('v', '<C-k>', '<cmd>Commentary<CR>')
+map('n', '<C-f>', '<cmd>Format<CR>')
 
 local cmp = require 'cmp'
 

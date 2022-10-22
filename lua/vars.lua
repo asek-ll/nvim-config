@@ -1,5 +1,5 @@
-local utils = {}
+local M = {}
 
-utils.cwd = vim.fn.expand '<sfile>:p:h'
+M.cwd = vim.fn.expand '<sfile>:p:h'
 
-return utils
+return M
