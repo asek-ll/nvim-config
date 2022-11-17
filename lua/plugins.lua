@@ -19,10 +19,12 @@ local function prequire(...)
 end
 
 packer.startup(function()
-    use 'udalov/kotlin-vim'
-    use 'wlangstroth/vim-racket'
-    use 'ziglang/zig.vim'
-    use 'fatih/vim-go'
+    use { 'udalov/kotlin-vim', ft = 'kotlin' }
+    use { 'wlangstroth/vim-racket', ft = 'racket' }
+    use { 'ziglang/zig.vim', ft = 'zig' }
+    use { 'tikhomirov/vim-glsl', ft = 'glsl' }
+    use { 'fatih/vim-go', ft = 'go' }
+
     use {
         'voldikss/vim-floaterm',
         config = function()
@@ -41,7 +43,6 @@ packer.startup(function()
             }
         end,
     }
-    use 'tikhomirov/vim-glsl'
 
     use {
         'nvim-treesitter/nvim-treesitter',
