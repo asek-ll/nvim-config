@@ -86,5 +86,20 @@ require('formatter').setup {
         glsl = {
             require('formatter.defaults').clangformat,
         },
+        go = {
+            require('formatter.filetypes.go').gofmt,
+        },
+        yaml = {
+            function()
+                return {
+                    exe = 'prettier',
+                    args = {
+                        '--parser',
+                        'yaml',
+                    },
+                    stdin = true,
+                }
+            end,
+        },
     },
 }

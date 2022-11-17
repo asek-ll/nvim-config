@@ -24,6 +24,7 @@ packer.startup(function()
     use { 'ziglang/zig.vim', ft = 'zig' }
     use { 'tikhomirov/vim-glsl', ft = 'glsl' }
     use { 'fatih/vim-go', ft = 'go' }
+    use { 'hashivim/vim-terraform', ft = 'terraform' }
 
     use {
         'voldikss/vim-floaterm',
@@ -82,6 +83,13 @@ packer.startup(function()
                 env_file = '.env',
                 yank_dry_run = true,
             }
+
+            vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+                pattern = { '*.http' },
+                callback = function()
+                    vim.api.nvim_set_keymap('n', '<C-n>', '<Plug>RestNvim', { noremap = true })
+                end,
+            })
         end,
         -- }}}
     }
