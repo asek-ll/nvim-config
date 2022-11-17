@@ -2,8 +2,8 @@ local work_dir = vim.fn.expand '<sfile>:p:h'
 vim.opt.rtp:append(work_dir)
 
 require 'options'
-require 'plugins'
 require 'keys'
+require 'plugins'
 require 'snippets'
 
 -- vim.cmd('silent! colorscheme PaperColor')

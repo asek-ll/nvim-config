@@ -36,7 +36,7 @@ map('n', '<F9>', '<cmd>lua require("harpoon.tmux").sendCommand(1, 1)require("har
 map('n', '<A-2>', '<cmd>Ranger<CR>')
 map('t', '<Esc>', '<C-\\><C-n>')
 map('n', '<C-k>', '<cmd>Commentary<CR>')
-map('v', '<C-k>', '<cmd>Commentary<CR>')
+map('v', '<C-k>', ':\'<,\'>Commentary<CR>')
 map('n', '<C-f>', '<cmd>Format<CR>')
 
 local cmp = require 'cmp'
