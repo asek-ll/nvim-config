@@ -99,7 +99,14 @@ packer.startup(function()
     use 'NLKNguyen/papercolor-theme'
     use { 'sonph/onehalf', rtp = 'vim/' }
     use 'cocopon/iceberg.vim'
-    use 'sainnhe/edge'
+    use {
+        'sainnhe/edge',
+        config = function()
+            if vim.env['DARK_MODE'] then
+                vim.g.edge_transparent_background = 2
+            end
+        end,
+    }
 
     use {
         'kyazdani42/nvim-tree.lua',
@@ -188,29 +195,10 @@ packer.startup(function()
     use 'L3MON4D3/LuaSnip'
     use {
         'hrsh7th/nvim-cmp',
-        -- {{{ config
+        requires = { { 'L3MON4D3/LuaSnip' } },
         config = function()
-            local cmp = require 'cmp'
-            cmp.setup {
-                snippet = {
-                    expand = function(args)
-                        require('luasnip').lsp_expand(args.body)
-                    end,
-                },
-
-                sources = {
-                    { name = 'nvim-lsp' },
-                    { name = 'luasnip' },
-                    { name = 'buffer' },
-                    { name = 'cmp_tabnine' },
-                },
-                mapping = {
-                    ['<C-p>'] = cmp.mapping.select_prev_item(),
-                    ['<C-n>'] = cmp.mapping.select_next_item(),
-                },
-            }
+            require 'plugins.cmp'
         end,
-        -- }}}
     }
 
     use 'honza/vim-snippets'
