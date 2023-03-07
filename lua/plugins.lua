@@ -26,6 +26,8 @@ packer.startup(function()
     use { 'fatih/vim-go', ft = 'go' }
     use { 'hashivim/vim-terraform', ft = 'terraform' }
 
+    use { 'mhinz/vim-startify' }
+
     use {
         'voldikss/vim-floaterm',
         config = function()
@@ -144,11 +146,14 @@ packer.startup(function()
         config = function()
             require('lint').linters_by_ft = {
                 python = { 'flake8' },
-                cpp = { 'clangtidy' },
+                -- cpp = { 'clangtidy' },
             }
 
             vim.cmd "au BufWritePost <buffer> lua require('lint').try_lint()"
         end,
+    }
+    use {
+        'sakhnik/nvim-gdb',
     }
 
     use 'terryma/vim-multiple-cursors'

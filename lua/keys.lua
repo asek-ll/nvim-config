@@ -20,6 +20,7 @@ map('n', '<F3>', '<cmd>Telescope find_files<CR>')
 map('n', '<F4>', '<cmd>lua require("telescope-lists").buffers()<CR>')
 map('n', '<F5>', '<cmd>Telescope live_grep<CR>')
 map('n', '<C-A-s>', '<cmd>Telescope find_files cwd=' .. cwd .. '<CR>')
+map('n', '<Leader>.', '<cmd>Telescope find_files cwd=' .. cwd .. '<CR>')
 
 map('t', '<F7>', '<cmd>FloatermToggle<CR>')
 map('n', '<F7>', '<cmd>FloatermToggle<CR>')
