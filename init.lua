@@ -16,6 +16,8 @@ vim.cmd 'silent! colorscheme edge'
 
 if vim.env['DARK_MODE'] or vim.g.neovide then
     vim.api.nvim_set_option('background', 'dark')
+    vim.cmd 'hi NvimTreeNormal guibg=NONE ctermbg=NONE'
+    vim.cmd 'hi NvimTreeEndOfBuffer guibg=NONE ctermbg=NONE'
 else
     vim.api.nvim_set_option('background', 'light')
 end
