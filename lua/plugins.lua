@@ -112,27 +112,7 @@ packer.startup(function()
 
     use {
         'kyazdani42/nvim-tree.lua',
-        -- {{{ config
-        config = function()
-            require('nvim-tree').setup {
-                update_focused_file = {
-                    update_root = true,
-                },
-                filters = {
-                    dotfiles = false,
-                },
-                view = {
-                    mappings = {
-                        list = {
-                            { key = 't', action = 'tabnew' },
-                            { key = 's', action = 'vsplit' },
-                            { key = 'i', action = 'split' },
-                        },
-                    },
-                },
-            }
-        end,
-        -- }}}
+        config = require 'plugins.nvim-tree',
     }
 
     use 'tpope/vim-surround'

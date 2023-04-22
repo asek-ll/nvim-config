@@ -14,6 +14,7 @@ vim.g.mapleader = ' '
 
 map('n', '<F1>', '<cmd>NvimTreeToggle<CR>')
 map('n', '<A-1>', '<cmd>NvimTreeFindFileToggle<CR>')
+map('n', '<Leader>1', '<cmd>NvimTreeFindFileToggle<CR>')
 map('n', '<F2>', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>')
 
 map('n', '<F3>', '<cmd>Telescope find_files<CR>')
