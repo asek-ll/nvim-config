@@ -52,7 +52,7 @@ packer.startup(function()
         -- {{{ config
         config = function()
             require('nvim-treesitter.configs').setup {
-                ensure_installed = { 'http', 'json', 'org' },
+                ensure_installed = { 'json', 'org' },
 
                 sync_install = false,
 
@@ -95,8 +95,6 @@ packer.startup(function()
         end,
         -- }}}
     }
-
-    use 'editorconfig/editorconfig-vim'
 
     use 'NLKNguyen/papercolor-theme'
     use { 'sonph/onehalf', rtp = 'vim/' }

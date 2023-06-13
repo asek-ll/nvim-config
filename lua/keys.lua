@@ -9,7 +9,6 @@ local function map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-
 vim.g.mapleader = ' '
 
 map('n', '<F1>', '<cmd>NvimTreeToggle<CR>')
@@ -30,11 +29,17 @@ map('n', '<Leader><F7>', '<cmd>lua require("harpoon.tmux").gotoTerminal(1)<CR>')
 map('n', '<Leader>7', '<cmd>lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>')
 
 map('n', '<F9>', ':make!<CR>')
-map('n', '<Leader><F9>', '<cmd>lua require("harpoon.tmux").sendCommand(1, 1)require("harpoon.tmux").gotoTerminal(1)<CR>')
-
+map(
+    'n',
+    '<Leader><F9>',
+    '<cmd>lua require("harpoon.tmux").sendCommand(1, 1)require("harpoon.tmux").gotoTerminal(1)<CR>'
+)
 
 map('n', '<A-2>', '<cmd>Ranger<CR>')
 map('t', '<Esc>', '<C-\\><C-n>')
 map('n', '<C-k>', '<cmd>Commentary<CR>')
-map('v', '<C-k>', ':\'<,\'>Commentary<CR>')
+map('v', '<C-k>', ":'<,'>Commentary<CR>")
 map('n', '<C-f>', '<cmd>Format<CR>')
+
+map('n', '<Leader>df', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+map('n', '<Leader>3', '<cmd>Telescope diagnostics<CR>')
