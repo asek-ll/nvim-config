@@ -61,3 +61,22 @@ nvim_lsp.rust_analyzer.setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }
+nvim_lsp.lua_ls.setup {
+    root_dir = function()
+        return vim.fn.getcwd()
+    end,
+    settings = {
+        Lua = {
+            runtime = {
+                version = '5.4',
+            },
+            diagnostics = {
+                globals = { 'vim' },
+            },
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+    on_attach = on_attach,
+}

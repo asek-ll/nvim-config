@@ -10,9 +10,10 @@ if vim.g.neovide then
     require 'neovide'
 end
 
--- vim.cmd('silent! colorscheme PaperColor')
+vim.cmd('silent! colorscheme PaperColor')
 -- vim.cmd('silent! colorscheme onehalflight')
-vim.cmd 'silent! colorscheme edge'
+-- vim.cmd('silent! colorscheme onehalfdark')
+-- vim.cmd 'silent! colorscheme edge'
 
 if vim.env['DARK_MODE'] or vim.g.neovide then
     vim.api.nvim_set_option('background', 'dark')
