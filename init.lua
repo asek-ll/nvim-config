@@ -10,7 +10,7 @@ if vim.g.neovide then
     require 'neovide'
 end
 
-vim.cmd('silent! colorscheme PaperColor')
+vim.cmd 'silent! colorscheme PaperColor'
 -- vim.cmd('silent! colorscheme onehalflight')
 -- vim.cmd('silent! colorscheme onehalfdark')
 -- vim.cmd 'silent! colorscheme edge'

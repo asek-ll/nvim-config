@@ -1,42 +1,32 @@
--- vim:foldmethod=marker:
-local vars = require 'vars'
-local cwd = vars.cwd
-
-local util = require 'packer.util'
-local packer = require 'packer'
-
-packer.init {
-    package_root = util.join_paths(cwd, 'pack'),
-    compile_path = util.join_paths(cwd, 'lua', 'packer_compiled.lua'),
-}
-
-local function prequire(...)
-    local status, lib = pcall(require, ...)
-    if status then
-        return lib
-    end
-    return nil
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system {
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable',
+        lazypath,
+    }
 end
+vim.opt.rtp:prepend(lazypath)
+require('lazy').setup {
+    { 'udalov/kotlin-vim', ft = 'kotlin' },
+    { 'wlangstroth/vim-racket', ft = 'racket' },
+    { 'ziglang/zig.vim', ft = 'zig' },
+    { 'tikhomirov/vim-glsl', ft = 'glsl' },
+    { 'fatih/vim-go', ft = 'go' },
+    { 'hashivim/vim-terraform', ft = 'terraform' },
 
-packer.startup(function()
-    use { 'udalov/kotlin-vim', ft = 'kotlin' }
-    use { 'wlangstroth/vim-racket', ft = 'racket' }
-    use { 'ziglang/zig.vim', ft = 'zig' }
-    use { 'tikhomirov/vim-glsl', ft = 'glsl' }
-    use { 'fatih/vim-go', ft = 'go' }
-    use { 'hashivim/vim-terraform', ft = 'terraform' }
-
-    use { 'mhinz/vim-startify' }
-
-    use {
+    { 'mhinz/vim-startify' },
+    {
         'voldikss/vim-floaterm',
         config = function()
             vim.g.floaterm_width = 0.8
             vim.g.floaterm_position = 'bottom'
         end,
-    }
-
-    use {
+    },
+    {
         'ThePrimeagen/harpoon',
         config = function()
             require('harpoon').setup {
@@ -45,9 +35,8 @@ packer.startup(function()
                 },
             }
         end,
-    }
-
-    use {
+    },
+    {
         'nvim-treesitter/nvim-treesitter',
         -- {{{ config
         config = function()
@@ -68,9 +57,8 @@ packer.startup(function()
             }
         end,
         -- }}}
-    }
-
-    use {
+    },
+    {
         'NTBBloodbath/rest.nvim',
         -- {{{ config
         config = function()
@@ -94,32 +82,37 @@ packer.startup(function()
             })
         end,
         -- }}}
-    }
+    },
 
-    use 'NLKNguyen/papercolor-theme'
-    use { 'sonph/onehalf', rtp = 'vim/' }
-    use 'cocopon/iceberg.vim'
-    use {
+    'NLKNguyen/papercolor-theme',
+    {
+        'sonph/onehalf',
+        config = function(plugin)
+            vim.opt.rtp:append(plugin.dir .. '/vim')
+        end,
+    },
+    'cocopon/iceberg.vim',
+    {
         'sainnhe/edge',
         config = function()
             if vim.env['DARK_MODE'] then
                 vim.g.edge_transparent_background = 2
             end
         end,
-    }
+    },
 
-    use {
+    {
         'kyazdani42/nvim-tree.lua',
         config = require 'plugins.nvim-tree',
-    }
+    },
 
-    use 'tpope/vim-surround'
-    use 'tpope/vim-commentary'
-    use 'tpope/vim-fugitive'
+    'tpope/vim-surround',
+    'tpope/vim-commentary',
+    'tpope/vim-fugitive',
 
-    use 'godlygeek/tabular'
+    'godlygeek/tabular',
 
-    use {
+    {
         'mfussenegger/nvim-lint',
         config = function()
             require('lint').linters_by_ft = {
@@ -129,32 +122,32 @@ packer.startup(function()
 
             vim.cmd "au BufWritePost <buffer> lua require('lint').try_lint()"
         end,
-    }
-    use {
+    },
+    {
         'sakhnik/nvim-gdb',
-    }
+    },
 
-    use 'terryma/vim-multiple-cursors'
-    use {
+    'terryma/vim-multiple-cursors',
+    {
         'Raimondi/delimitMate',
         config = function()
             vim.g.delimitMate_expand_cr = 1
             vim.g.delimitMate_expand_space = 1
             vim.g.delimitMate_matchpairs = '(:),[:],{:}'
         end,
-    }
+    },
 
-    use 'francoiscabrol/ranger.vim'
-    use 'rbgrouleff/bclose.vim'
+    'francoiscabrol/ranger.vim',
+    'rbgrouleff/bclose.vim',
 
-    use {
+    {
         'famiu/feline.nvim',
         config = function()
             require('feline').setup()
         end,
-    }
+    },
 
-    use {
+    {
         'nvim-telescope/telescope.nvim',
         -- {{{ config
         config = function()
@@ -171,44 +164,36 @@ packer.startup(function()
             }
         end,
         -- }}}
-    }
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
+    },
+    'nvim-lua/popup.nvim',
+    'nvim-lua/plenary.nvim',
 
-    use 'L3MON4D3/LuaSnip'
-    use {
+    'L3MON4D3/LuaSnip',
+    {
         'hrsh7th/nvim-cmp',
-        requires = { { 'L3MON4D3/LuaSnip' } },
+        dependencies = { 'L3MON4D3/LuaSnip' },
         config = function()
             require 'plugins.cmp'
         end,
-    }
+    },
 
-    use 'honza/vim-snippets'
+    'honza/vim-snippets',
 
-    use {
+    {
         'mhartington/formatter.nvim',
         config = function()
             require 'plugins.formatter'
         end,
-    }
+    },
 
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'saadparwaiz1/cmp_luasnip'
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-nvim-lsp',
+    'saadparwaiz1/cmp_luasnip',
 
-    use {
+    {
         'neovim/nvim-lspconfig',
         config = function()
             require 'plugins.lspconfig'
         end,
-    }
-end)
-
-prequire 'packer_compiled'
-
-vim.api.nvim_create_autocmd('BufWritePost', {
-    pattern = 'plugins.lua',
-    command = 'source <afile> | PackerCompile',
-    group = vim.api.nvim_create_augroup('packer_user_config', { clear = true }),
-})
+    },
+}

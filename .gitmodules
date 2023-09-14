@@ -1,3 +1,0 @@
-[submodule "pack/base/start/packer.nvim"]
-	path = pack/base/start/packer.nvim
-	url = https://github.com/wbthomason/packer.nvim

@@ -2,12 +2,12 @@ require('formatter').setup {
     filetype = {
         lua = {
             function()
-                local util = require 'packer.util'
+                local Path = require("plenary.path")
                 local cwd = require('vars').cwd
                 return {
                     exe = 'stylua',
                     args = {
-                        '--config-path ' .. util.join_paths(cwd, 'lua', 'stylua.toml'),
+                        '--config-path ' .. Path:new(cwd, 'lua', 'stylua.toml'):expand(),
                         '-',
                     },
                     stdin = true,
