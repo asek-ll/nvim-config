@@ -18,7 +18,7 @@ require('lazy').setup {
     { 'fatih/vim-go', ft = 'go' },
     { 'hashivim/vim-terraform', ft = 'terraform' },
 
-    { 'mhinz/vim-startify' },
+    -- { 'mhinz/vim-startify' },
     {
         'voldikss/vim-floaterm',
         config = function()
