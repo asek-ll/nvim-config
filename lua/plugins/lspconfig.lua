@@ -1,7 +1,6 @@
 local nvim_lsp = require 'lspconfig'
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', '<Leader>ld', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
@@ -78,5 +77,9 @@ nvim_lsp.lua_ls.setup {
             },
         },
     },
+    on_attach = on_attach,
+}
+nvim_lsp.racket_langserver.setup {
+    capabilities = capabilities,
     on_attach = on_attach,
 }
