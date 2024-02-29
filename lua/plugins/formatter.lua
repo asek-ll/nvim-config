@@ -101,5 +101,8 @@ require('formatter').setup {
                 }
             end,
         },
+        sql = {
+            require('formatter.filetypes.sql').pgformat,
+        },
     },
 }
