@@ -15,7 +15,7 @@ require('lazy').setup {
     { 'wlangstroth/vim-racket', ft = 'racket' },
     { 'ziglang/zig.vim', ft = 'zig' },
     { 'tikhomirov/vim-glsl', ft = 'glsl' },
-    { 'fatih/vim-go', ft = 'go' },
+    { 'fatih/vim-go', ft = {'go', "gohtmltmpl"} },
     { 'hashivim/vim-terraform', ft = 'terraform' },
 
     -- { 'mhinz/vim-startify' },
@@ -169,6 +169,16 @@ require('lazy').setup {
         'neovim/nvim-lspconfig',
         config = function()
             require 'plugins.lspconfig'
+        end,
+    },
+    {
+        'Exafunction/codeium.vim',
+        config = function()
+            vim.g.codeium_enabled = false
+            vim.g.codeium_disable_bindings = 1
+            vim.keymap.set('i', '…;', function()
+                return vim.fn['codeium#Accept']()
+            end, { expr = true, silent = true })
         end,
     },
 }
