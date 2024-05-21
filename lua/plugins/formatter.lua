@@ -2,7 +2,7 @@ require('formatter').setup {
     filetype = {
         lua = {
             function()
-                local Path = require("plenary.path")
+                local Path = require 'plenary.path'
                 local cwd = require('vars').cwd
                 return {
                     exe = 'stylua',
@@ -100,6 +100,12 @@ require('formatter').setup {
                     stdin = true,
                 }
             end,
+        },
+        sql = {
+            require('formatter.filetypes.sql').pgformat,
+        },
+        terraform = {
+            require('formatter.filetypes.terraform').terraformfmt,
         },
     },
 }

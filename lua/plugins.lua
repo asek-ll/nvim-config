@@ -15,7 +15,7 @@ require('lazy').setup {
     { 'wlangstroth/vim-racket', ft = 'racket' },
     { 'ziglang/zig.vim', ft = 'zig' },
     { 'tikhomirov/vim-glsl', ft = 'glsl' },
-    { 'fatih/vim-go', ft = 'go' },
+    { 'fatih/vim-go', ft = {'go', "gohtmltmpl"} },
     { 'hashivim/vim-terraform', ft = 'terraform' },
 
     -- { 'mhinz/vim-startify' },
@@ -58,31 +58,6 @@ require('lazy').setup {
         end,
         -- }}}
     },
-    {
-        'NTBBloodbath/rest.nvim',
-        -- {{{ config
-        config = function()
-            require('rest-nvim').setup {
-                result_split_horizontal = false,
-                skip_ssl_verification = false,
-                highlight = {
-                    enabled = true,
-                    timeout = 150,
-                },
-                jump_to_request = false,
-                env_file = '.env',
-                yank_dry_run = true,
-            }
-
-            vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-                pattern = { '*.http' },
-                callback = function()
-                    vim.api.nvim_set_keymap('n', '<C-n>', '<Plug>RestNvim', { noremap = true })
-                end,
-            })
-        end,
-        -- }}}
-    },
 
     'NLKNguyen/papercolor-theme',
     {
@@ -117,7 +92,7 @@ require('lazy').setup {
         config = function()
             require('lint').linters_by_ft = {
                 python = { 'flake8' },
-                -- cpp = { 'clangtidy' },
+                yaml = { 'yamllint' },
             }
 
             vim.cmd "au BufWritePost <buffer> lua require('lint').try_lint()"
@@ -194,6 +169,16 @@ require('lazy').setup {
         'neovim/nvim-lspconfig',
         config = function()
             require 'plugins.lspconfig'
+        end,
+    },
+    {
+        'Exafunction/codeium.vim',
+        config = function()
+            vim.g.codeium_enabled = false
+            vim.g.codeium_disable_bindings = 1
+            vim.keymap.set('i', '…;', function()
+                return vim.fn['codeium#Accept']()
+            end, { expr = true, silent = true })
         end,
     },
 }

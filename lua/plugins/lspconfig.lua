@@ -60,6 +60,7 @@ nvim_lsp.rust_analyzer.setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }
+
 nvim_lsp.lua_ls.setup {
     root_dir = function()
         return vim.fn.getcwd()
@@ -80,6 +81,11 @@ nvim_lsp.lua_ls.setup {
     on_attach = on_attach,
 }
 nvim_lsp.racket_langserver.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+nvim_lsp.terraformls.setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }
