@@ -107,5 +107,16 @@ require('formatter').setup {
         terraform = {
             require('formatter.filetypes.terraform').terraformfmt,
         },
+        racket = {
+            function()
+                return {
+                    exe = 'raco',
+                    args = {
+                        'fmt',
+                    },
+                    stdin = true,
+                }
+            end,
+        },
     },
 }
