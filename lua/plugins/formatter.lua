@@ -1,3 +1,4 @@
+local config = require 'editorconfig'
 require('formatter').setup {
     filetype = {
         lua = {
@@ -96,6 +97,26 @@ require('formatter').setup {
                     args = {
                         '--parser',
                         'yaml',
+                    },
+                    stdin = true,
+                }
+            end,
+        },
+        xml = {
+            function()
+                local bufnr = vim.fn.bufnr()
+                return {
+                    exe = 'prettier',
+                    args = {
+                        '--parser',
+                        'html',
+                        '--print-width',
+                        140,
+                        '--bracket-same-line',
+                        '--html-whitespace-sensitivity',
+                        'ignore',
+                        '--tab-width',
+                        vim.bo[bufnr].shiftwidth,
                     },
                     stdin = true,
                 }
