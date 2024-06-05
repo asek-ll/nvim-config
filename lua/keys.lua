@@ -43,3 +43,7 @@ map('n', '<C-f>', '<cmd>Format<CR>')
 
 map('n', '<Leader>df', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 map('n', '<Leader>3', '<cmd>Telescope diagnostics<CR>')
+
+vim.keymap.set('i', '<C-\\>', function()
+    return vim.fn['codeium#Accept']()
+end, { expr = true, silent = true })
