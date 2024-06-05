@@ -30,6 +30,7 @@ require('lazy').setup {
         'nvim-treesitter/nvim-treesitter',
         -- {{{ config
         config = function()
+            vim.filetype.add { extension = { templ = 'templ' } }
             require('nvim-treesitter.configs').setup {
                 ensure_installed = { 'json', 'org', 'templ' },
 
@@ -164,8 +165,9 @@ require('lazy').setup {
     {
         'Exafunction/codeium.vim',
         config = function()
-            vim.g.codeium_enabled = false
+            -- vim.g.codeium_enabled = false
             vim.g.codeium_disable_bindings = 1
+
             vim.keymap.set('i', '<C-\\>', function()
                 return vim.fn['codeium#Accept']()
             end, { expr = true, silent = true })
