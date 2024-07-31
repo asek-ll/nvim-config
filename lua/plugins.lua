@@ -20,6 +20,15 @@ require('lazy').setup {
 
     -- { 'mhinz/vim-startify' },
     {
+        'LhKipp/nvim-nu',
+        config = function()
+            require('nu').setup {
+                use_lsp_features = false,
+            }
+        end,
+        ft = 'nu',
+    },
+    {
         'voldikss/vim-floaterm',
         config = function()
             vim.g.floaterm_width = 0.8

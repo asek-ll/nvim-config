@@ -22,3 +22,7 @@ if vim.env['DARK_MODE'] or vim.g.neovide then
 else
     vim.api.nvim_set_option('background', 'light')
 end
+
+if vim.env['NU_VERSION'] then
+    vim.api.nvim_set_option('shellredir', '| table | save -f')
+end
