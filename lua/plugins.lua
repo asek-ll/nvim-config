@@ -84,6 +84,7 @@ require('lazy').setup {
             require('lint').linters_by_ft = {
                 python = { 'flake8' },
                 yaml = { 'yamllint' },
+                go = { 'golangci-lint' },
             }
 
             vim.cmd "au BufWritePost <buffer> lua require('lint').try_lint()"
@@ -124,6 +125,8 @@ require('lazy').setup {
                     mappings = {
                         i = {
                             ['<ESC>'] = actions.close,
+                            ['<Ctrl+l>'] = actions.send_selected_to_loclist,
+                            ['<Ctrl+q>'] = actions.send_selected_to_qflist,
                         },
                     },
                 },
