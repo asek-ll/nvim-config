@@ -29,11 +29,14 @@ require('formatter').setup {
         },
         javascript = {
             function()
+                local bufnr = vim.fn.bufnr()
                 return {
                     exe = 'prettier',
                     args = {
                         '--parser',
                         'babel',
+                        '--tab-width',
+                        vim.bo[bufnr].shiftwidth,
                     },
                     stdin = true,
                 }
