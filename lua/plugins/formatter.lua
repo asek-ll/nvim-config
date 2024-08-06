@@ -1,4 +1,3 @@
-local config = require 'editorconfig'
 require('formatter').setup {
     filetype = {
         lua = {

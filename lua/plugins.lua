@@ -39,6 +39,7 @@ require('lazy').setup {
         'nvim-treesitter/nvim-treesitter',
         -- {{{ config
         config = function()
+            vim.filetype.add { extension = { templ = 'templ' } }
             require('nvim-treesitter.configs').setup {
                 ensure_installed = { 'json', 'org', 'templ' },
 
@@ -92,6 +93,7 @@ require('lazy').setup {
             require('lint').linters_by_ft = {
                 python = { 'flake8' },
                 yaml = { 'yamllint' },
+                go = { 'golangci-lint' },
             }
 
             vim.cmd "au BufWritePost <buffer> lua require('lint').try_lint()"
@@ -132,6 +134,8 @@ require('lazy').setup {
                     mappings = {
                         i = {
                             ['<ESC>'] = actions.close,
+                            ['<Ctrl+l>'] = actions.send_selected_to_loclist,
+                            ['<Ctrl+q>'] = actions.send_selected_to_qflist,
                         },
                     },
                 },
@@ -173,8 +177,9 @@ require('lazy').setup {
     {
         'Exafunction/codeium.vim',
         config = function()
-            vim.g.codeium_enabled = false
+            -- vim.g.codeium_enabled = false
             vim.g.codeium_disable_bindings = 1
+
             vim.keymap.set('i', '<C-\\>', function()
                 return vim.fn['codeium#Accept']()
             end, { expr = true, silent = true })
