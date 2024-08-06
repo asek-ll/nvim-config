@@ -15,7 +15,7 @@ end
 -- vim.cmd('silent! colorscheme onehalfdark')
 vim.cmd 'silent! colorscheme edge'
 
-if vim.env['DARK_MODE'] or vim.g.neovide then
+if vim.env.DARK_MODE then
     vim.api.nvim_set_option('background', 'dark')
     vim.cmd 'hi NvimTreeNormal guibg=NONE ctermbg=NONE'
     vim.cmd 'hi NvimTreeEndOfBuffer guibg=NONE ctermbg=NONE'
@@ -23,6 +23,6 @@ else
     vim.api.nvim_set_option('background', 'light')
 end
 
-if vim.env['NU_VERSION'] then
+if vim.env.NU_VERSION then
     vim.api.nvim_set_option('shellredir', '| table | save -f')
 end
