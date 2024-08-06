@@ -26,3 +26,7 @@ end
 if vim.env.NU_VERSION then
     vim.api.nvim_set_option('shellredir', '| table | save -f')
 end
+
+if vim.fn.has 'macunix' then
+    vim.g.codeium_enabled = false
+end

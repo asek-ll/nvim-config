@@ -177,7 +177,6 @@ require('lazy').setup {
     {
         'Exafunction/codeium.vim',
         config = function()
-            -- vim.g.codeium_enabled = false
             vim.g.codeium_disable_bindings = 1
 
             vim.keymap.set('i', '<C-\\>', function()
