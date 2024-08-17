@@ -29,4 +29,6 @@ end
 
 if vim.fn.has 'macunix' then
     vim.g.codeium_enabled = false
+    vim.g.codeium_os = 'Darwin'
+    vim.g.codeium_arch = 'arm64'
 end
