@@ -33,7 +33,7 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-nvim_lsp.tsserver.setup {
+nvim_lsp.ts_ls.setup {
     capabilities = capabilities,
     root_dir = function()
         return vim.fn.getcwd()

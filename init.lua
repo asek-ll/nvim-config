@@ -31,4 +31,8 @@ if vim.fn.has 'macunix' then
     vim.g.codeium_enabled = false
     vim.g.codeium_os = 'Darwin'
     vim.g.codeium_arch = 'arm64'
+elseif vim.loop.os_uname().sysname == 'Linux' then
+    vim.g.codeium_os = 'Linux'
+    vim.g.codeium_arch = 'x86_64'
 end
+
