@@ -144,5 +144,8 @@ require('formatter').setup {
         toml = {
             require('formatter.filetypes.toml').taplo,
         },
+        nix = {
+            require('formatter.filetypes.nix').nixpkgs_fmt,
+        },
     },
 }

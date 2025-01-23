@@ -33,13 +33,19 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-nvim_lsp.ts_ls.setup {
-    capabilities = capabilities,
-    root_dir = function()
-        return vim.fn.getcwd()
-    end,
+nvim_lsp.denols.setup {
     on_attach = on_attach,
+    root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+    capabilities = capabilities,
 }
+
+nvim_lsp.ts_ls.setup {
+    on_attach = on_attach,
+    root_dir = nvim_lsp.util.root_pattern 'package.json',
+    single_file_support = false,
+    capabilities = capabilities,
+}
+
 nvim_lsp.pyright.setup {
     capabilities = capabilities,
     root_dir = function()

@@ -28,6 +28,10 @@ require('lazy').setup {
         end,
         ft = 'nu',
     },
+	{
+		'LnL7/vim-nix',
+		ft = 'nix',
+	},
     {
         'voldikss/vim-floaterm',
         config = function()
