@@ -1,4 +1,5 @@
 require('formatter').setup {
+    -- log_level = vim.log.levels.TRACE,
     filetype = {
         lua = {
             function()
@@ -89,8 +90,22 @@ require('formatter').setup {
         glsl = {
             require('formatter.defaults').clangformat,
         },
+        -- go = {
+        --     require('formatter.filetypes.go').gofmt,
+        -- },
         go = {
-            require('formatter.filetypes.go').gofmt,
+            function()
+                return {
+                    exe = 'ya',
+                    args = {
+                        'tool',
+                        'yoimports',
+                        '-w',
+                    },
+                    stdin = false,
+                    -- no_append = true,
+                }
+            end,
         },
         yaml = {
             function()
@@ -128,7 +143,7 @@ require('formatter').setup {
             require('formatter.filetypes.sql').pgformat,
         },
         terraform = {
-            require('formatter.filetypes.terraform').terraformfmt,
+            require('formatter.filetypes.terraform').tofufmt,
         },
         racket = {
             function()

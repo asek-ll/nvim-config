@@ -53,7 +53,12 @@ nvim_lsp.pyright.setup {
     end,
     on_attach = on_attach,
 }
+-- nvim_lsp.gopls.setup {
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+-- }
 nvim_lsp.gopls.setup {
+    cmd = { 'ya', 'tool', 'gopls' },
     capabilities = capabilities,
     on_attach = on_attach,
 }

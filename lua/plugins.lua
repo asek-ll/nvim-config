@@ -15,8 +15,9 @@ require('lazy').setup {
     { 'wlangstroth/vim-racket', ft = 'racket' },
     { 'ziglang/zig.vim', ft = 'zig' },
     { 'tikhomirov/vim-glsl', ft = 'glsl' },
-    { 'fatih/vim-go', ft = { 'go', 'gohtmltmpl' } },
+    -- { 'fatih/vim-go', ft = { 'go', 'gohtmltmpl' } },
     { 'hashivim/vim-terraform', ft = 'terraform' },
+    { 'saltstack/salt-vim', ft = 'sls' },
 
     -- { 'mhinz/vim-startify' },
     {
@@ -97,7 +98,7 @@ require('lazy').setup {
             require('lint').linters_by_ft = {
                 python = { 'flake8' },
                 yaml = { 'yamllint' },
-                go = { 'golangcilint' },
+                -- go = { 'golangcilint' },
             }
 
             vim.cmd "au BufWritePost <buffer> lua require('lint').try_lint()"
