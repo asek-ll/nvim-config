@@ -162,5 +162,8 @@ require('formatter').setup {
         nix = {
             require('formatter.filetypes.nix').nixpkgs_fmt,
         },
+        proto = {
+            require('formatter.filetypes.proto').buf_format ,
+        },
     },
 }
