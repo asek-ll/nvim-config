@@ -143,7 +143,7 @@ require('formatter').setup {
             require('formatter.filetypes.sql').pgformat,
         },
         terraform = {
-            require('formatter.filetypes.terraform').tofufmt,
+            require('formatter.filetypes.terraform').terraformfmt,
         },
         racket = {
             function()
@@ -165,5 +165,8 @@ require('formatter').setup {
         proto = {
             require('formatter.filetypes.proto').buf_format ,
         },
+        haskell = {
+            require('formatter.filetypes.haskell').fourmolu ,
+        }
     },
 }

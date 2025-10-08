@@ -18,6 +18,7 @@ require('lazy').setup {
     -- { 'fatih/vim-go', ft = { 'go', 'gohtmltmpl' } },
     { 'hashivim/vim-terraform', ft = 'terraform' },
     { 'saltstack/salt-vim', ft = 'sls' },
+    { 'google/vim-jsonnet', ft = 'jsonnet' },
 
     -- { 'mhinz/vim-startify' },
     {
