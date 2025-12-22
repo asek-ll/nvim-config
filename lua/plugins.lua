@@ -190,4 +190,11 @@ require('lazy').setup {
             end, { expr = true, silent = true })
         end,
     },
+    {
+        'coder/claudecode.nvim',
+        opts = {
+            terminal_cmd = '/Users/denblo/bin/cc',
+        },
+        config = true,
+    },
 }
