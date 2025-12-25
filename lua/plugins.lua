@@ -181,16 +181,6 @@ require('lazy').setup {
         end,
     },
     {
-        'Exafunction/codeium.vim',
-        config = function()
-            vim.g.codeium_disable_bindings = 1
-
-            vim.keymap.set('i', '<C-\\>', function()
-                return vim.fn['codeium#Accept']()
-            end, { expr = true, silent = true })
-        end,
-    },
-    {
         'coder/claudecode.nvim',
         opts = {
             terminal_cmd = '/Users/denblo/bin/cc',
