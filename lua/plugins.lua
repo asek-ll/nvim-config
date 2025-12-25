@@ -97,7 +97,7 @@ require('lazy').setup {
         'mfussenegger/nvim-lint',
         config = function()
             require('lint').linters_by_ft = {
-                python = { 'flake8' },
+                python = { 'ruff' },
                 yaml = { 'yamllint' },
                 -- go = { 'golangcilint' },
             }

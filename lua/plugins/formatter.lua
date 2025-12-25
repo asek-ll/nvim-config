@@ -67,13 +67,7 @@ require('formatter').setup {
             end,
         },
         python = {
-            function()
-                return {
-                    exe = 'black',
-                    args = { '-' },
-                    stdin = true,
-                }
-            end,
+            require('formatter.filetypes.python').ruff,
         },
         rust = {
             function()
@@ -163,10 +157,10 @@ require('formatter').setup {
             require('formatter.filetypes.nix').nixpkgs_fmt,
         },
         proto = {
-            require('formatter.filetypes.proto').buf_format ,
+            require('formatter.filetypes.proto').buf_format,
         },
         haskell = {
-            require('formatter.filetypes.haskell').fourmolu ,
-        }
+            require('formatter.filetypes.haskell').fourmolu,
+        },
     },
 }
