@@ -1,7 +1,9 @@
 local work_dir = vim.fn.expand '<sfile>:p:h'
 vim.opt.rtp:append(work_dir)
 
-require 'options'
+local options = require 'options'
+options.set_nvim_default_options()
+
 require 'keys'
 require 'plugins'
 require 'snippets'
@@ -26,13 +28,3 @@ end
 if vim.env.NU_VERSION then
     vim.api.nvim_set_option('shellredir', '| table | save -f')
 end
-
-if vim.fn.has 'macunix' then
-    vim.g.codeium_enabled = false
-    vim.g.codeium_os = 'Darwin'
-    vim.g.codeium_arch = 'arm64'
-elseif vim.loop.os_uname().sysname == 'Linux' then
-    vim.g.codeium_os = 'Linux'
-    vim.g.codeium_arch = 'x86_64'
-end
-

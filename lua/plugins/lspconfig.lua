@@ -1,5 +1,4 @@
-local nvim_lsp = require 'lspconfig'
-
+local options = require 'options'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local opts = { noremap = true, silent = true }
@@ -33,44 +32,52 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-nvim_lsp.denols.setup {
+vim.lsp.config('denols', {
     on_attach = on_attach,
-    root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+    root_markers = {
+        'deno.json',
+        'deno.jsonc',
+    },
     capabilities = capabilities,
-}
+})
 
-nvim_lsp.ts_ls.setup {
+vim.lsp.config('ts_ls', {
     on_attach = on_attach,
-    root_dir = nvim_lsp.util.root_pattern 'package.json',
+    root_markers = {
+        'package.json',
+    },
     single_file_support = false,
     capabilities = capabilities,
-}
+})
 
-nvim_lsp.pyright.setup {
-    capabilities = capabilities,
-    root_dir = function()
-        return vim.fn.getcwd()
-    end,
-    on_attach = on_attach,
-}
-nvim_lsp.gopls.setup {
+vim.lsp.config('pyright', {
     capabilities = capabilities,
     on_attach = on_attach,
-}
-nvim_lsp.clangd.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
+})
+if options.is_yandex() then
+    vim.lsp.config('gopls', {
+        cmd = { 'ya', 'tool', 'gopls' },
+        capabilities = capabilities,
+        on_attach = on_attach,
+    })
+else
+    vim.lsp.config('gopls', {
+        capabilities = capabilities,
+        on_attach = on_attach,
+    })
+end
 
-nvim_lsp.rust_analyzer.setup {
+vim.lsp.config('clangd', {
     capabilities = capabilities,
     on_attach = on_attach,
-}
+})
 
-nvim_lsp.lua_ls.setup {
-    root_dir = function()
-        return vim.fn.getcwd()
-    end,
+vim.lsp.config('rust_analyzer', {
+    capabilities = capabilities,
+    on_attach = on_attach,
+})
+
+vim.lsp.config('lua_ls', {
     settings = {
         Lua = {
             runtime = {
@@ -85,13 +92,25 @@ nvim_lsp.lua_ls.setup {
         },
     },
     on_attach = on_attach,
-}
-nvim_lsp.racket_langserver.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
+})
 
-nvim_lsp.terraformls.setup {
+vim.lsp.config('racket_langserver', {
     capabilities = capabilities,
     on_attach = on_attach,
-}
+})
+
+vim.lsp.config('terraformls', {
+    capabilities = capabilities,
+    on_attach = on_attach,
+})
+
+vim.lsp.enable 'denols'
+vim.lsp.enable 'ts_ls'
+vim.lsp.enable 'pyright'
+vim.lsp.enable 'gopls'
+vim.lsp.enable 'clangd'
+vim.lsp.enable 'rust_analyzer'
+vim.lsp.enable 'lua_ls'
+vim.lsp.enable 'racket_langserver'
+vim.lsp.enable 'terraformls'
+vim.lsp.enable 'jsonnet_ls'

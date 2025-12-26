@@ -1,3 +1,4 @@
+local options = require 'options'
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system {
@@ -10,15 +11,28 @@ if not vim.loop.fs_stat(lazypath) then
     }
 end
 vim.opt.rtp:prepend(lazypath)
-require('lazy').setup {
+
+local non_yandex_plugins = {
+    { 'fatih/vim-go', ft = { 'go', 'gohtmltmpl' } },
+}
+
+local yandex_plugins = {
+    { 'saltstack/salt-vim', ft = 'sls' },
+    { 'google/vim-jsonnet', ft = 'jsonnet' },
+    {
+        'coder/claudecode.nvim',
+        opts = { terminal_cmd = '/Users/denblo/bin/cc' },
+        config = true,
+    },
+}
+
+local common_plugins = {
     { 'udalov/kotlin-vim', ft = 'kotlin' },
     { 'wlangstroth/vim-racket', ft = 'racket' },
     { 'ziglang/zig.vim', ft = 'zig' },
     { 'tikhomirov/vim-glsl', ft = 'glsl' },
-    { 'fatih/vim-go', ft = { 'go', 'gohtmltmpl' } },
     { 'hashivim/vim-terraform', ft = 'terraform' },
-
-    -- { 'mhinz/vim-startify' },
+    { 'LnL7/vim-nix', ft = 'nix' },
     {
         'LhKipp/nvim-nu',
         config = function()
@@ -28,10 +42,6 @@ require('lazy').setup {
         end,
         ft = 'nu',
     },
-	{
-		'LnL7/vim-nix',
-		ft = 'nix',
-	},
     {
         'voldikss/vim-floaterm',
         config = function()
@@ -42,9 +52,10 @@ require('lazy').setup {
     {
         'nvim-treesitter/nvim-treesitter',
         -- {{{ config
+        build = ':TSUpdate',
         config = function()
             vim.filetype.add { extension = { templ = 'templ' } }
-            require('nvim-treesitter.configs').setup {
+            require('nvim-treesitter').setup {
                 ensure_installed = { 'json', 'org', 'templ' },
 
                 sync_install = false,
@@ -94,11 +105,16 @@ require('lazy').setup {
     {
         'mfussenegger/nvim-lint',
         config = function()
-            require('lint').linters_by_ft = {
-                python = { 'flake8' },
+            local linters_by_ft = {
+                python = { 'ruff' },
                 yaml = { 'yamllint' },
-                go = { 'golangcilint' },
             }
+
+            if not options.is_yandex() then
+                linters_by_ft.go = { 'golangcilint' }
+            end
+
+            require('lint').linters_by_ft = linters_by_ft
 
             vim.cmd "au BufWritePost <buffer> lua require('lint').try_lint()"
         end,
@@ -178,14 +194,19 @@ require('lazy').setup {
             require 'plugins.lspconfig'
         end,
     },
-    {
-        'Exafunction/codeium.vim',
-        config = function()
-            vim.g.codeium_disable_bindings = 1
-
-            vim.keymap.set('i', '<C-\\>', function()
-                return vim.fn['codeium#Accept']()
-            end, { expr = true, silent = true })
-        end,
-    },
 }
+local plugins = {}
+for _, plugin in pairs(common_plugins) do
+    table.insert(plugins, plugin)
+end
+if options.is_yandex() then
+    for _, plugin in pairs(yandex_plugins) do
+        table.insert(plugins, plugin)
+    end
+else
+    for _, plugin in pairs(non_yandex_plugins) do
+        table.insert(plugins, plugin)
+    end
+end
+
+require('lazy').setup(plugins)
