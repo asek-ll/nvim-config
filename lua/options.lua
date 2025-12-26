@@ -39,6 +39,7 @@ local buffer_options = {
     undofile = true,
 }
 
+
 for k, v in pairs(global_options) do
     vim.api.nvim_set_option(k, v)
 end

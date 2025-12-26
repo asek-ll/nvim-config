@@ -10,7 +10,8 @@ if not vim.loop.fs_stat(lazypath) then
     }
 end
 vim.opt.rtp:prepend(lazypath)
-require('lazy').setup {
+
+local common_plugins = {
     { 'udalov/kotlin-vim', ft = 'kotlin' },
     { 'wlangstroth/vim-racket', ft = 'racket' },
     { 'ziglang/zig.vim', ft = 'zig' },
@@ -19,6 +20,7 @@ require('lazy').setup {
     { 'hashivim/vim-terraform', ft = 'terraform' },
     { 'saltstack/salt-vim', ft = 'sls' },
     { 'google/vim-jsonnet', ft = 'jsonnet' },
+    { 'LnL7/vim-nix', ft = 'nix' },
 
     -- { 'mhinz/vim-startify' },
     {
@@ -31,10 +33,6 @@ require('lazy').setup {
         ft = 'nu',
     },
     {
-        'LnL7/vim-nix',
-        ft = 'nix',
-    },
-    {
         'voldikss/vim-floaterm',
         config = function()
             vim.g.floaterm_width = 0.8
@@ -44,9 +42,10 @@ require('lazy').setup {
     {
         'nvim-treesitter/nvim-treesitter',
         -- {{{ config
+        build = ':TSUpdate',
         config = function()
             vim.filetype.add { extension = { templ = 'templ' } }
-            require('nvim-treesitter.configs').setup {
+            require('nvim-treesitter').setup {
                 ensure_installed = { 'json', 'org', 'templ' },
 
                 sync_install = false,
@@ -188,3 +187,5 @@ require('lazy').setup {
         config = true,
     },
 }
+
+require('lazy').setup(common_plugins)
