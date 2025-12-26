@@ -39,17 +39,28 @@ local buffer_options = {
     undofile = true,
 }
 
+local is_yandex = vim.env.YANDEX == 'true'
 
-for k, v in pairs(global_options) do
-    vim.api.nvim_set_option(k, v)
+local M = {}
+
+M.set_nvim_default_options = function()
+    for k, v in pairs(global_options) do
+        vim.api.nvim_set_option(k, v)
+    end
+
+    for k, v in pairs(window_options) do
+        vim.api.nvim_win_set_option(0, k, v)
+        vim.api.nvim_set_option(k, v)
+    end
+
+    for k, v in pairs(buffer_options) do
+        vim.api.nvim_buf_set_option(0, k, v)
+        vim.api.nvim_set_option(k, v)
+    end
 end
 
-for k, v in pairs(window_options) do
-    vim.api.nvim_win_set_option(0, k, v)
-    vim.api.nvim_set_option(k, v)
+M.is_yandex = function()
+    return is_yandex
 end
 
-for k, v in pairs(buffer_options) do
-    vim.api.nvim_buf_set_option(0, k, v)
-    vim.api.nvim_set_option(k, v)
-end
+return M

@@ -1,3 +1,4 @@
+local options = require 'options'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local opts = { noremap = true, silent = true }
@@ -53,15 +54,18 @@ vim.lsp.config('pyright', {
     capabilities = capabilities,
     on_attach = on_attach,
 })
--- nvim_lsp.gopls.setup {
---     capabilities = capabilities,
---     on_attach = on_attach,
--- }
-vim.lsp.config('gopls', {
-    -- cmd = { 'ya', 'tool', 'gopls' },
-    capabilities = capabilities,
-    on_attach = on_attach,
-})
+if options.is_yandex() then
+    vim.lsp.config('gopls', {
+        cmd = { 'ya', 'tool', 'gopls' },
+        capabilities = capabilities,
+        on_attach = on_attach,
+    })
+else
+    vim.lsp.config('gopls', {
+        capabilities = capabilities,
+        on_attach = on_attach,
+    })
+end
 
 vim.lsp.config('clangd', {
     capabilities = capabilities,

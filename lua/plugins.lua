@@ -1,3 +1,4 @@
+local options = require 'options'
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system {
@@ -11,18 +12,27 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local non_yandex_plugins = {
+    { 'fatih/vim-go', ft = { 'go', 'gohtmltmpl' } },
+}
+
+local yandex_plugins = {
+    { 'saltstack/salt-vim', ft = 'sls' },
+    { 'google/vim-jsonnet', ft = 'jsonnet' },
+    {
+        'coder/claudecode.nvim',
+        opts = { terminal_cmd = '/Users/denblo/bin/cc' },
+        config = true,
+    },
+}
+
 local common_plugins = {
     { 'udalov/kotlin-vim', ft = 'kotlin' },
     { 'wlangstroth/vim-racket', ft = 'racket' },
     { 'ziglang/zig.vim', ft = 'zig' },
     { 'tikhomirov/vim-glsl', ft = 'glsl' },
-    -- { 'fatih/vim-go', ft = { 'go', 'gohtmltmpl' } },
     { 'hashivim/vim-terraform', ft = 'terraform' },
-    { 'saltstack/salt-vim', ft = 'sls' },
-    { 'google/vim-jsonnet', ft = 'jsonnet' },
     { 'LnL7/vim-nix', ft = 'nix' },
-
-    -- { 'mhinz/vim-startify' },
     {
         'LhKipp/nvim-nu',
         config = function()
@@ -95,11 +105,16 @@ local common_plugins = {
     {
         'mfussenegger/nvim-lint',
         config = function()
-            require('lint').linters_by_ft = {
+            local linters_by_ft = {
                 python = { 'ruff' },
                 yaml = { 'yamllint' },
-                -- go = { 'golangcilint' },
             }
+
+            if not options.is_yandex() then
+                linters_by_ft.go = { 'golangcilint' }
+            end
+
+            require('lint').linters_by_ft = linters_by_ft
 
             vim.cmd "au BufWritePost <buffer> lua require('lint').try_lint()"
         end,
@@ -179,13 +194,19 @@ local common_plugins = {
             require 'plugins.lspconfig'
         end,
     },
-    {
-        'coder/claudecode.nvim',
-        opts = {
-            terminal_cmd = '/Users/denblo/bin/cc',
-        },
-        config = true,
-    },
 }
+local plugins = {}
+for _, plugin in pairs(common_plugins) do
+    table.insert(plugins, plugin)
+end
+if options.is_yandex() then
+    for _, plugin in pairs(yandex_plugins) do
+        table.insert(plugins, plugin)
+    end
+else
+    for _, plugin in pairs(non_yandex_plugins) do
+        table.insert(plugins, plugin)
+    end
+end
 
-require('lazy').setup(common_plugins)
+require('lazy').setup(plugins)

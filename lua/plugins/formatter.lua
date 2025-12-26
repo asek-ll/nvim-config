@@ -1,4 +1,6 @@
-require('formatter').setup {
+local options = require 'options'
+
+local config = {
     -- log_level = vim.log.levels.TRACE,
     filetype = {
         lua = {
@@ -84,23 +86,6 @@ require('formatter').setup {
         glsl = {
             require('formatter.defaults').clangformat,
         },
-        -- go = {
-        --     require('formatter.filetypes.go').gofmt,
-        -- },
-        go = {
-            function()
-                return {
-                    exe = 'ya',
-                    args = {
-                        'tool',
-                        'yoimports',
-                        '-w',
-                    },
-                    stdin = false,
-                    -- no_append = true,
-                }
-            end,
-        },
         yaml = {
             function()
                 return {
@@ -164,3 +149,22 @@ require('formatter').setup {
         },
     },
 }
+if options.is_yandex() then
+    config.go = {
+        function()
+            return {
+                exe = 'ya',
+                args = {
+                    'tool',
+                    'yoimports',
+                    '-w',
+                },
+                stdin = false,
+                -- no_append = true,
+            }
+        end,
+    }
+else
+    config.go = { require('formatter.filetypes.go').gofmt }
+end
+require('formatter').setup(config)

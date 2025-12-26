@@ -1,7 +1,9 @@
 local work_dir = vim.fn.expand '<sfile>:p:h'
 vim.opt.rtp:append(work_dir)
 
-require 'options'
+local options = require 'options'
+options.set_nvim_default_options()
+
 require 'keys'
 require 'plugins'
 require 'snippets'
