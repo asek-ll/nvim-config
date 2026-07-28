@@ -19,11 +19,21 @@ local non_yandex_plugins = {
 local yandex_plugins = {
     { 'saltstack/salt-vim', ft = 'sls' },
     { 'google/vim-jsonnet', ft = 'jsonnet' },
-    {
-        'coder/claudecode.nvim',
-        opts = { terminal_cmd = '/Users/denblo/bin/cc' },
-        config = true,
+	{
+        'nvim-mini/mini.diff',
+        config = function()
+			local arc  = require('plugins.minidiff_arc')
+            require('mini.diff').setup({ 
+				source = arc.gen_source(),
+				view = {
+					style = 'sign',
+					signs = { add = '+', change = '~', delete = '-' }, 
+				},
+			})
+			arc.setup()
+        end,
     },
+
 }
 
 local common_plugins = {
