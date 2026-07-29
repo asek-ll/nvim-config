@@ -1,4 +1,4 @@
-local cwd = require('vars').cwd
+local cwd = vim.fn.expand '<sfile>:p:h'
 
 
 local global_options = {
