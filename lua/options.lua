@@ -1,4 +1,5 @@
-local cwd = vim.fn.expand '<sfile>:p:h'
+local cwd = require('vars').cwd
+
 
 local global_options = {
     backupdir = cwd .. '/.backupdir',
