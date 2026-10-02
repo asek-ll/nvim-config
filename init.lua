@@ -13,17 +13,17 @@ if vim.g.neovide then
 end
 
 -- vim.cmd 'silent! colorscheme PaperColor'
--- vim.cmd('silent! colorscheme onehalflight')
--- vim.cmd('silent! colorscheme onehalfdark')
 vim.cmd 'silent! colorscheme edge'
 
-if vim.env.DARK_MODE then
-    vim.api.nvim_set_option('background', 'dark')
-    vim.cmd 'hi NvimTreeNormal guibg=NONE ctermbg=NONE'
-    vim.cmd 'hi NvimTreeEndOfBuffer guibg=NONE ctermbg=NONE'
-else
-    vim.api.nvim_set_option('background', 'light')
-end
+-- if vim.o.background == 'dark' then
+--     --     -- vim.api.nvim_set_option('background', 'dark')
+--     --     vim.cmd 'hi NvimTreeNormal guibg=NONE ctermbg=NONE'
+--     --     vim.cmd 'hi NvimTreeEndOfBuffer guibg=NONE ctermbg=NONE'
+--     vim.cmd 'silent! colorscheme onehalfdark'
+-- else
+--     vim.cmd 'silent! colorscheme onehalflight'
+--     --     -- vim.api.nvim_set_option('background', 'light')
+-- end
 
 if vim.env.NU_VERSION then
     vim.api.nvim_set_option('shellredir', '| table | save -f')
